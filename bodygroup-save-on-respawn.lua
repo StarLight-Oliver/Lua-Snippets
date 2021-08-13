@@ -8,7 +8,7 @@ local handleDeath = function(ply)
 	local bodygroupCount = table.Count(ply:GetBodyGroups())
 	local bodygroups = {}
 	for i = 0, bodygroupCount - 1 do
-		bodygroups[i] = ply:GetBodyGroup(i)
+		bodygroups[i] = ply:GetBodygroup(i)
 	end
 
 
@@ -20,8 +20,8 @@ end
 local handleSpawn = function(ply)
 	// timer simple for 0 ticks
 	if ply._bodygroupData then
-		local bodygroups = ply._bodygroupData.bodygroups
-		local model = ply._bodygroupData.model
+		local bodygroups = ply._bodygroupData[1]
+		local model = ply._bodygroupData[2]
 		
 		timer.Simple(0, function()
 
@@ -36,7 +36,7 @@ local handleSpawn = function(ply)
 
 			// set the bodygroups
 			for i = 0, table.Count(bodygroups) - 1 do
-				ply:SetBodyGroup(i, bodygroups[i])
+				ply:SetBodygroup(i, bodygroups[i])
 			end
 		end)
 	end
