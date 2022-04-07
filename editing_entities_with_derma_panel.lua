@@ -18,8 +18,7 @@ if SERVER then
 
 		local mdl = net.ReadString()
 
-		ent:SetHealth(mdl)
-		ent:SetMaxHealth(mdl)
+		ent:SetModel(mdl)
 	end)
 
 else
