@@ -23,7 +23,7 @@ end
 
 
 
-function draw.RoundedBoxPoly(cornerRadius, x, y, w, h)
+function draw.RoundedBoxPoly(cornerRadius, x, y, w, h, noDraw)
 	local poly = {}
 	poly[1] = { x = x + w/2, y = y + h/2, u = 0.5, v = 0.5}
 
@@ -110,7 +110,11 @@ function draw.RoundedBoxPoly(cornerRadius, x, y, w, h)
 
 	poly[#poly + 1] = {x = x + w/2, y = y, u = 0.5, v = 0}
 
-	surface.DrawPoly(poly)
+	if not noDraw then
+		surface.DrawPoly(poly)
+	end
+	
+	return poly
 end
 
 local mat = Material("osiris/jvs/container/lightsaber/1_2.png", "noclamp smooth")
