@@ -15,11 +15,10 @@ if SERVER then
 	
 	net.Receive("writeSmth", function(len, ply)
 		local ent = ply.entity
-
+		if not IsValid(ent) then return end
 		local mdl = net.ReadString()
 
-		ent:SetHealth(mdl)
-		ent:SetMaxHealth(mdl)
+		ent:SetModel(mdl)
 	end)
 
 else
