@@ -1,3 +1,28 @@
+local cosCache = {}
+
+local math_cos = function(value)
+	if (cosCache[value]) then
+		return cosCache[value]
+	end
+
+	cosCache[value] = math.cos(math.rad(value))
+	return cosCache[value]
+end
+
+local sinCache = {}
+
+local math_sin = function(value)
+	if (sinCache[value]) then
+		return sinCache[value]
+	end
+
+	sinCache[value] = math.sin(math.rad(value))
+	return sinCache[value]
+end
+
+
+
+
 function draw.RoundedBoxPoly(cornerRadius, x, y, w, h)
 	local poly = {}
 	poly[1] = { x = x + w/2, y = y + h/2, u = 0.5, v = 0.5}
@@ -8,8 +33,8 @@ function draw.RoundedBoxPoly(cornerRadius, x, y, w, h)
 	local topX = x + w-cornerRadius
 	local topY = y + cornerRadius
 	for i = -89, 0 do
-		local X = topX + math.cos(math.rad(i)) * cornerRadius 
-		local Y = topY + math.sin(math.rad(i)) *cornerRadius
+		local X = topX + math_cos(i) * cornerRadius
+		local Y = topY + math_sin(i) * cornerRadius
 		poly[#poly + 1] = {
 			x = X,
 			y = Y,
@@ -21,7 +46,7 @@ function draw.RoundedBoxPoly(cornerRadius, x, y, w, h)
 	poly[#poly + 1] = {
 		x = x + w,
 		y = y + h - cornerRadius,
-		u =  1, 
+		u =  1,
 		v = (h-cornerRadius) / h,
 	}
 
@@ -29,8 +54,8 @@ function draw.RoundedBoxPoly(cornerRadius, x, y, w, h)
 	topY = y +h - cornerRadius
 
 	for i = 1, 90 do
-		local X = topX + math.cos(math.rad(i)) * cornerRadius 
-		local Y = topY + math.sin(math.rad(i)) *cornerRadius
+		local X = topX + math_cos(i) * cornerRadius
+		local Y = topY + math_sin(i) * cornerRadius
 		poly[#poly + 1] = {
 			x = X,
 			y = Y,
@@ -42,7 +67,7 @@ function draw.RoundedBoxPoly(cornerRadius, x, y, w, h)
 	poly[#poly + 1] = {
 		x = x +cornerRadius,
 		y = y + h,
-		u =  cornerRadius/w, 
+		u =  cornerRadius/w,
 		v = 1,
 	}
 
@@ -51,8 +76,8 @@ function draw.RoundedBoxPoly(cornerRadius, x, y, w, h)
 
 	for _i = 180, 270 do
 		i = _i - 90
-		local X = topX + math.cos(math.rad(i)) * cornerRadius 
-		local Y = topY + math.sin(math.rad(i)) *cornerRadius
+		local X = topX + math_cos(i) * cornerRadius
+		local Y = topY + math_sin(i) * cornerRadius
 		poly[#poly + 1] = {
 			x = X,
 			y = Y,
@@ -73,8 +98,8 @@ function draw.RoundedBoxPoly(cornerRadius, x, y, w, h)
 
 	for _i = 270, 360 do
 		i = _i - 90
-		local X = topX + math.cos(math.rad(i)) * cornerRadius 
-		local Y = topY + math.sin(math.rad(i)) *cornerRadius
+		local X = topX + math_cos(i) * cornerRadius
+		local Y = topY + math_sin(i) * cornerRadius
 		poly[#poly + 1] = {
 			x = X,
 			y = Y,
@@ -92,9 +117,9 @@ local mat = Material("osiris/jvs/container/lightsaber/1_2.png", "noclamp smooth"
 hook.Add("HUDPaint", "draw.RoundedBoxPoly", function()
 	surface.SetMaterial(mat)
 	surface.SetDrawColor(255,255,255)
-	
-	local w,h  = ScrW(), ScrH()	
-	
+
+	local w,h  = ScrW(), ScrH()
+
 	local progress = math.sin(CurTime())*0.5 + 0.5
 	draw.RoundedBoxPoly( progress * 100 , 100, h/2 - 100, 200, 200)
 end)
