@@ -8,14 +8,11 @@ hook.Add("CalcView", "asdasd", function(ply, _pos, _ang, fov)
 
 
 	if head == -1 then return end // Cam is fucked
+	-- local pos, ang = ply:GetBonePosition(head)
 
-	print(head)
-
-	local pos, ang = ply:GetBonePosition(head)
-
-	-- local matrix = LocalPlayer():GetBoneMatrix(head)
-	-- local pos = matrix:GetTranslation()
-	-- local ang = matrix:GetAngles()
+	local matrix = LocalPlayer():GetBoneMatrix(head)
+	local pos = matrix:GetTranslation()
+	local ang = matrix:GetAngles()
 
 	print(ply:GetPos(), pos)
 	//print(pos)
