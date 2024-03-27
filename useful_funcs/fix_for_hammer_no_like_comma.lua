@@ -1,7 +1,6 @@
 /*
 	This is a fix for fixing lua run with hammer. At times lua run will mess up due to commanas in the code, as it is used to seperate things in the bsp file format.
 
-
 	This code below allows you to construct arguments, and tables without using any commans at all.
 	By doing what is called "function" chaining.
 	Dictonaries will expect a key, then a value, then a key, then a value, and so on.

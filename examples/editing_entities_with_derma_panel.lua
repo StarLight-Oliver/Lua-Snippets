@@ -1,5 +1,5 @@
 if SERVER then
-	
+
 	//SV FILE
 	util.AddNetworkString("writeSmth")
 
@@ -12,7 +12,7 @@ if SERVER then
 			net.Send(ply)
 		end
 	end
-	
+
 	net.Receive("writeSmth", function(len, ply)
 		local ent = ply.entity
 		if not IsValid(ent) then return end
@@ -34,6 +34,6 @@ else
 	net.Receive("writeSmth", function(len)
 		local ent = net.ReadEntity()
 
-		openMenu(ent)	
+		openMenu(ent)
 	end)
 end

@@ -4,7 +4,7 @@ function player.FindInSphere(pos, dist)
 	local l = 0
 
 
-	for _, ply in ipairs(player.GetAll()) do
+	for _, ply in player.Iterator() do
 		if ply:GetPos():DistToSqr(pos) < dist then
 			l = l + 1
 			t[l] = ply
@@ -17,7 +17,7 @@ function player.FindInBox(mins, maxs)
 	mins, max = OrderVectors(mins, maxs)
 	local players = {}
 	local count = 0
-	for index, ply in ipairs(player.GetAll()) do
+	for index, ply in player.Iterator() do
 		local pos = ply:GetPos()
 		if pos[1] >= mins[1] and pos[1] <= maxs[1] and pos[2] >= mins[2] and pos[2] <= maxs[2] and pos[3] >= mins[3] and pos[3] <= maxs[3] then
 			count = count + 1
